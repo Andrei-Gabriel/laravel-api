@@ -9,7 +9,8 @@ use App\Post;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::all();
+        // $posts = Post::all();
+        $posts = Post::where("published", true)->get();
         return response()->json($posts);
     }
 }
