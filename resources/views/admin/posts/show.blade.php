@@ -30,6 +30,10 @@
                             @endif
                         </div>
                         <span>{{$post->content}}</span>
+                        <figure class="figure">
+                            <img src="{{$post->image}}" class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                        </figure>
                         <div class="container p-0 d-flex flex-row mt-3">
                             <a href="{{route("posts.edit", $post->id)}}"><button type="button" class="btn btn-warning mr-3">Modifica</button></a>
                             <form action="{{route("posts.destroy", $post->id)}}" method="POST">

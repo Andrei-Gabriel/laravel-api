@@ -19,7 +19,7 @@ class PostController extends Controller
         "published" => "sometimes|accepted",
         "category_id" => "nullable|exists:categories,id",
         "tags" => "nullable|exists:tags,id",
-        "image" => "nullable|image|mimes:jpeg,jpg,bmp,png|max:2048"
+        "image" => "nullable|mimes:jpeg,jpg,bmp,png|max:2048"
     ];
     /**
      * Display a listing of the resource.
@@ -62,18 +62,19 @@ class PostController extends Controller
         $newPost->fill($data);
         $newPost->published = isset($data["published"]) ? 1 : 0;
         $newPost->slug = $this->getSlug($newPost->title);
-        $newPost->save();
-
+        
         // Se presente, salvo img
         if (isset($data["image"])) {
             $path_image = Storage::put("uploads", $data["image"]);
             $newPost->image = $path_image;
         }
+        
+        $newPost->save();
 
         if (isset($data["tags"])){
             $newPost->tags()->sync($data["tags"]);
         }
-
+        
         // Redirect al post appena creato
         return redirect()->route("posts.show", $newPost->id);
     }

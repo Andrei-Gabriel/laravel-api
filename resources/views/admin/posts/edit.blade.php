@@ -56,6 +56,18 @@
                     <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="image">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input " id="image" name="image">
+                    <label class="custom-file-label" for="image">Choose file</label>
+                </div>
+            </div>
+            @error("image")
+                <div class="alert alert-danger">{{$message}}</div>
+            @enderror
             <button type="submit" class="btn btn-primary">Modifica</button>
         </form>
     </div>
